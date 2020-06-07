@@ -21,9 +21,6 @@ dec=pd.read_csv('C:\\Users\\gaibo\\OneDrive\\Documents\\Python\\Kidney_cont.csv'
 dec=dec.dropna()
 ##remove all null values
 
-##print (dec.head())
-####show first 5 lines
-
 ##print (dec['fail'].value_counts())
 ######shows how many fail vs transplant. 79039 success, 23207 fail
 
@@ -60,11 +57,8 @@ X_train=sc.fit_transform(X_train)
 X_test=sc.transform(X_test)
 ##not fit transform, don't wanna over fit the test set
 
-##print (X_train[:10])
-####show first 10 trained profiles
 
-
-#### 3 different models
+#### 3 different models you can choose from, comment out the ones not using
 #### random forest needs the imported classifier from sk learn
 ####MLPClassifier is a neural network classifier (multi layer)
 #### svm is support vector model, which contains the classifier svc 
