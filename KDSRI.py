@@ -21,9 +21,9 @@ dec=pd.read_csv('C:\\Users\\gaibo\\OneDrive\\Documents\\Python\\Kidney_cont.csv'
 dec=dec.dropna()
 ##remove all null values
 
+
 ##print (dec['fail'].value_counts())
 ######shows how many fail vs transplant. 79039 success, 23207 fail
-
 ##sns.countplot(dec['fail'])
 ##plt.show()
 ####if you wanna see graph of fail vs success
@@ -58,7 +58,7 @@ X_test=sc.transform(X_test)
 ##not fit transform, don't wanna over fit the test set
 
 
-#### 3 different models you can choose from, comment out the ones not using
+#### 3 different models, pick your fighter!
 #### random forest needs the imported classifier from sk learn
 ####MLPClassifier is a neural network classifier (multi layer)
 #### svm is support vector model, which contains the classifier svc 
@@ -105,17 +105,17 @@ auc_sv=auc(sv_fp, sv_tp)
 print(auc_sv)
 
 ####build a regression with LogisticRegression
-##log=LogisticRegression()
-##log.fit(X_train, y_train)
-##pred_log=log.decision_function(X_test)
+log=LogisticRegression()
+log.fit(X_train, y_train)
+pred_log=log.decision_function(X_test)
 
 
 ######get roc with logistic regression:
-##log_fp, log_tp, threshold=roc_curve(y_test, pred_log)
+log_fp, log_tp, threshold=roc_curve(y_test, pred_log)
 
-####this is our false pos, true positive, and threshold
-##auc_log=auc(log_fp, log_tp)
-####print(auc_log)
+##this is our false pos, true positive, and threshold
+auc_log=auc(log_fp, log_tp)
+##print(auc_log)
 
 
 ######MLPC Classifier
@@ -131,11 +131,12 @@ print(auc_sv)
 ##auc_mlp=auc(ml_fp, ml_tp)
 
 plt.plot(sv_fp, sv_tp, linestyle='-', label='SVM (AUC=)'+ str(auc_sv))
-##plt.plot(log_fp, log_tp, marker='.', label='logistic (AUC=)'+ str(auc_log))
+plt.plot(log_fp, log_tp, marker='.', label='logistic (AUC=)'+ str(auc_log))
 ##plt.plot(ml_fp, ml_tp, marker='1', label='MLP AUC='+str(auc_mlp))
 
-plt.xlabel('false positive rate -->>')
-plt.ylabel('true positive rate -->>')
+plt.title('C-Statistic for Machine Learning Model')
+plt.xlabel('sensitivity -->>')
+plt.ylabel('1 - specificity -->>')
 plt.legend()
 plt.show()
 
